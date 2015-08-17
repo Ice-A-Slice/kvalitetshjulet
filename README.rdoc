@@ -1,3 +1,5 @@
+Built with Ruby On Rails 4
+
 Kvalitetshjulet is a web based administration application for different kind of employees in schools in the comunity Olofström in Sweden. It is their platform to visualize the schedule and events in their personal schools and on state level. 
 
 Get the git repo
@@ -8,7 +10,7 @@ To be able to use the application you will have to write down an existing gmail 
 
 Run "rails s" to start up a local server.
 Open a web browser (make sure to be online with the gmail account you wrote down in the seeds.db file) and go to localhost:3000
-to log in to the gmail  Skriv in den gmail i seeds.db filen och kör "rake db:seed"
+to log in.
 
 See youtube demonstration
 www.youtube.com/watch?v=3ttF7cCxcKQ
