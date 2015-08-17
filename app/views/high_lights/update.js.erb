@@ -1,0 +1,13 @@
+$('.edit_high_light').bind('ajax:complete', function(resp) {
+	$("#notify").html("Comment was successfully updated.")
+            .fadeIn("slow");
+    setTimeout(function(){$("#notify").fadeOut("slow");},5000);
+	$("#event_wrapper").html("<%= j render(:partial => 'high_lights/show') %>");
+    var colors = ['', 'red', 'yellow', 'green'];
+    var colorNumber = parseInt($($(resp.target)[0]).find('#high_light_color')[0].value);
+    var color = colors[colorNumber];
+
+    wheel.rings.teacher.getWedgeById(selected_week).setColor(color);
+
+    Layers.teacher.draw();
+});

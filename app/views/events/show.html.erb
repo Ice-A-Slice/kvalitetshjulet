@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titel:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Kommentar:</strong>
+  <%= @event.comment %>
+</p>
+
+<p>
+  <strong>Datum:</strong>
+  <%= @event.datetime %>
+</p>
+
+<p>
+  <strong>Vecka:</strong>
+  <%= @event.week %>
+</p>
+
+<p>
+  <strong>Roll:</strong>
+  <%= @event.user_id %>
+</p>
+
+<p>
+  <strong>Skola:</strong>
+  <%= @event.school_id %>
+</p>
+
+<% if @event.file.present? %>
+<p>
+  <strong>Bifogad fil:</strong>
+<%= link_to 'Ladda ner', @event.file.url %>
+</p>
+
+<% else %>
+<p>
+  <strong>Bifogad fil:</strong>
+<span style="color:lightgrey;">Ingen fil</span>
+</p>
+
+<% end %>
+
+
+
+
+
+<%= link_to 'Redigera', edit_event_path(@event), class: 'button tiny', style: 'color: white; margin-top: 20px;'  %> |
+<%= link_to 'Tillbaka', events_path, class: 'button tiny back', style: 'color: white; margin-top: 20px;'  %>

@@ -1,0 +1,52 @@
+<%= form_for SchoolUser.new do |f| %>
+    <%= f.hidden_field(:school_id, value: @school.id) %>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <table class="auto_size">
+          <thead>
+          <tr>
+            <th>Lägg till</th>
+            <th>Namn</th>
+            <th>Email</th>
+            <th>Yrke</th>
+
+          </tr>
+          </thead>
+          <tbody>
+
+          <% @teachers.each do |p| %>
+            <% if @teachers.where(:id).empty? %>
+              <% @showTeacher.push(p) %>
+              <% @temp = SchoolUser.where(:user_id == p.id) %>
+              <% @temp.each do |ap| %>
+                <% if ap.school_id == @school.id %>
+                  <% @hideTeacher.push(ap)%>
+                <% end %>
+                <% @showTeacher.each do |x| %>
+                  <% @hideTeacher.each do |y| %>
+                    <% if x.id === y.user_id %>
+                      <% @showTeacher.delete(x) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+
+          <% @showTeacher.each do |t| %>
+              <tr>
+                <td><%= f.radio_button :user_id, t.id %></td>
+                <td><%= t.name %></td>
+                <td><%= t.email %></td>
+                <td><%= t.user_type %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%= f.submit "Registrera personal", :class => "button tiny", style: 'margin-top: 20px; float: left; margin-right: 10px;' %>
+<% end %>

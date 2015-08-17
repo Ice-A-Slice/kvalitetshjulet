@@ -1,0 +1,33 @@
+<h3>Vecka <%= @week %></h3>
+<hr>
+
+<div class='content' >
+
+    <p>
+    <strong>Aktivitet:</strong><br>
+    <%= @high_light.comment %>
+  </p>
+
+  <p>
+    <strong>Arbetsbelastning:</strong><br>
+    <% if @high_light.color == 1 %>
+        <%= image_tag 'reddot.png', :alt => 'Röd Prick' %>
+        Hög
+    <% end %>
+    <% if @high_light.color == 2 %>
+        <%= image_tag 'yellowdot.png', :alt => 'Gul Prick' %>
+        Normal
+    <% end %>
+    <% if @high_light.color == 3 %>
+        <%= image_tag 'greendot.png', :alt => 'Grön Prick' %>
+        Låg
+    <% end %>
+  </p>
+
+  <%= link_to 'Ta Bort', high_light_path(@high_light), method: :delete, remote: true, :class => 'unbind_click button tiny back', onclick: "deleteEvent(this, '#{@high_light.week}');" %>
+  <%= button_tag 'Ändra', :class => 'unbind_click button tiny', :data => { editevent: "sessions/edit_high_lights/#{@high_light.id}" } %>
+</div>
+
+
+
+

@@ -1,0 +1,250 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require jquery.ui.datepicker
+ *= require_self
+ *= require foundation_and_overrides
+ *= require_tree .
+ *= require dataTables/jquery.dataTables.foundation
+ */
+@import 'foundation-icons';
+
+$footer-height: 7em; // Set to however many lines of text you want to have in your footer. Sorry, no dynamic option here.
+
+html, body { height: 100%; }
+
+#wrap {
+    min-height: 95.4%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto ($footer-height * -1);
+}
+
+#wrap > *:last-child {
+    padding-bottom: $footer-height;
+}
+
+#wrap > *:first-child {
+    padding-top: 50px;
+}
+
+#footer {
+    height: $footer-height;
+
+    p {
+        float: right; 
+        font-size: 10px; 
+        color: #656565;
+    }
+}
+
+form{
+  label{
+    font-size: 17px;
+  }
+}
+
+table {
+  width:100%;
+  border-radius: 2px 2px 2px 2px;
+}
+
+input {
+  margin:0px;
+}
+
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+a, a:visited {
+  color:#008cba;
+}
+
+a:hover {
+  color:#006383;
+  background:none;
+}
+
+.top-bar-section {
+
+  .separator {
+    height: 45px;
+    padding-left: 1px;
+    padding-right: 1px;
+    border-right: 2px solid #404040; 
+  }
+
+  a {
+    color: #ededed;
+    margin-right: 6px;
+    margin-left: 8px;
+  }
+
+  a:hover {
+    color:#ededed;
+    background:none;
+    border-bottom: 1px solid #434343;
+    border-right: 1px solid #434343; 
+    border-left: 1px solid #252525; 
+    border-top: 1px solid #252525;
+    margin-right: 5px;
+    margin-left: 7px;
+    text-shadow: 1px 1px #252525;
+  }
+
+  ul.dropdown {
+
+    li {
+      width: 119px;
+      height: 47px;
+    }
+
+    a {
+      height: 47px;
+    }
+
+    li:first-child {
+
+      a{
+        -moz-box-shadow: inset 0 1px 0 0 #404040;
+        -webkit-box-shadow: inset 0 1px 0 0 #404040;
+        box-shadow: inset 0 1px 0 0 #404040;
+      }
+
+      .insethax {
+        height: 1px;
+        position: absolute;
+        float: right;
+        width: 119px;
+        -moz-box-shadow: inset -70px 0 0 0 #333333;
+        -webkit-box-shadow: inset -70px 0 0 0 #333333;
+        box-shadow: inset -70px 0 0 0 #333333;
+      }
+    }
+
+    a:hover {
+      margin-left: 8px;
+      border: none;
+      height: 47px;
+      border-bottom: 1px solid #434343;
+      border-right: 1px solid #434343; 
+      -moz-box-shadow: inset 2px 1px 0 0 #252525;
+      -webkit-box-shadow: inset 2px 1px 0 0 #252525;
+      box-shadow: inset 2px 1px 0 0 #252525;
+    }
+  }
+}
+
+.top-bar-select-year {
+  width: 110px;
+  margin-left: 10px;
+  float: left;
+  span {
+    color: #ededed;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 18px;
+    line-height: 45px;
+  }
+  select {
+    color: #333;
+    display: block;
+    width: 75px;
+    height: 25px;
+    padding: 0;
+    float: right;
+    margin: 9px 0 0 0;
+  }
+}
+
+tr {
+  .list {
+     width: 10%;
+   }
+}
+
+.title {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 35px;
+}
+
+.profil {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 25px;
+}
+
+.profilBox {
+  
+  padding: 5px;
+}
+
+.profilewrapper {
+  background-color: #f9f9f9;
+  width: 100%;
+}
+
+.gray_overlay {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 1355px;
+  height: 150%;
+  background-color: gray;
+  z-index:1001;
+  -moz-opacity: 0.8;
+  opacity:.70;
+  filter: alpha(opacity=70);
+  margin-left: -18%;
+}
+
+.white_content {
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  background-color: white;
+  z-index:1002;
+  overflow: auto;
+}
+
+.X {
+  float: right;
+  margin-right: 2px;
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+}
+
+#notify {
+  padding: 10px; 
+  border: 1px solid gray; 
+  border-radius: 3px; 
+  position: fixed; 
+  bottom: 4px; 
+  right: 4px; 
+  background-color: #F5F5F0; 
+  display: none;
+}
+
+.back {
+  color: white !important; 
+  background: #ba0000 !important;
+  margin-left: 10px !important;
+}
+
+a.button, a.button:visited {
+  color: #fff;
+}

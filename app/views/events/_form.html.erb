@@ -1,0 +1,57 @@
+<%= form_for(@event, :html => {:multipart => true}) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :titel %><br>
+    <%= f.text_field :title, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :kommentar %><br>
+    <%= f.text_area :comment, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :datum %><br>
+    <%= f.datetime_select :datetime, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :roll %><br>
+    <%= f.text_field :user_id, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :skola %><br>
+    <%= f.text_field :school_id, :required => true %>
+  </div>
+   <div class="field">
+    <%= f.label :vecka %><br>
+    <%= f.text_field :week, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :fil %><br>
+    <%= f.file_field :file, :required => true %>
+  </div>
+  <% 
+    ##
+    # The colorpicker is written in JavaScript in assets/javascript/syronex-colorpicker.js
+    # with css-styles in assets/stylesheets/events.css.scss 
+    ##
+  %>
+
+  <div class="actions" style="float: left; margin-right: 10px;">
+    <% if params[:action] == 'new' %>
+      <%= f.submit "Lägg till", :class => "button tiny", style: 'margin-top: 10px' %>
+    <% else %>
+      <%= f.submit "Uppdatera", :class => "button tiny", style: 'margin-top: 10px;' %>
+    <% end %>
+  </div>
+<% end %>
+

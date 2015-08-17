@@ -1,0 +1,41 @@
+<%= form_for [:teacher, @user] do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <% if msg.include? 'confirmation ' %>
+                  <li><%= msg.gsub!('confirmation ','') %></li>
+              <% else %>
+                  <li><%= msg %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+      <h3>Lägg till ny personal</h3>
+      <h4 class="subheader">Här kan du lägga till ny personal. Personal kan skapa event på hjulet, och göra highlights.</h4>
+    <br />
+    <div class="field">
+      <%= f.label :namn %>
+      <%= f.text_field :name, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email, :required => true %>
+    </div>
+    <div class="field">
+        <%= f.label :email_confirmation, "Bekräfta mailadress" %>
+        <%= f.text_field :email_confirmation, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :user_type, :value=> "teacher" %>
+    </div>
+    <div class="actions" style="float: left; margin-right: 10px;">
+
+      <%= f.submit "Lägg till", :class => "button tiny"%>
+      <%= link_to 'Tillbaka', teacher_users_path, class: 'button tiny back', style: 'color: white' %>
+
+    </div>
+<% end %>

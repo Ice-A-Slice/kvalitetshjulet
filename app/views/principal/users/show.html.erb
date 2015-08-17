@@ -1,0 +1,101 @@
+<script type="text/javascript">
+window.alert = function() {};
+
+alert = function() {};
+</script>
+<h1 class="profil">Profil</h1>
+<hr/>
+
+<p id="notice"><%= notice %></p>
+
+<h5 class="subheader"><strong>Namn:</strong> <%= @user.name %></h5>
+
+<h5 class="subheader">
+  <strong>Email:</strong>
+  <%= @user.email %>
+</h5>
+
+
+<%= link_to 'Redigera', edit_principal_user_path(@user), class: 'button tiny', style: 'color: white; margin-top: 20px; margin-right: 5px;' %>
+<%= link_to 'Tillbaka', principal_users_path, class: 'button tiny back', style: 'color: white; margin-top: 20px;' %>
+
+<h4>Din skola</h4>
+<hr/>
+
+<table>
+  <thead>
+    <tr>
+      <th>Skola</th>
+      <th>Vecka</th>
+      <th>Datum</th>
+      <th>Titel</th>
+      <th>kommentar</th>
+      <th>Bifogad Fil</th>
+    </tr>
+  </thead>
+
+
+  <h1 class="profil"><%= @user.name %>s Events</h1>
+
+    <tbody>
+
+    <% @schoolUsers.each do |su| %>
+      <% @schools.each do |school| %>
+        <% if su.user_id == @user.id and school.id == su.school_id%>
+          <tr>
+            <% @events.each do |event| %>
+              <% if school.id == event.school_id %>
+                <td><%= school.name %></td>
+
+                <td><%= event.week %></td>
+                <td><%= event.datetime.to_s.to(10) %></td>
+                <td><%= event.title %></td>
+                <td><%= event.comment %></td>
+                <% if event.file.present? %>
+                  <td><%= link_to 'Ladda ner', event.file.url %></td>
+                <% else %>
+                  <td></td>
+                <% end %>
+                    </tr>
+              <% end %>
+            <% end %>
+
+        <% end %>
+      <% end %>
+    <% end %>     
+
+  </tbody>
+</table>
+
+
+
+
+<h4>Personal på din skola</h4>
+<hr/>
+
+<table>
+  <thead>
+  <tr>
+    <th>Skola</th>
+    <th>Namn</th>
+    <th>Länk till personals utvärdering</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user.schools.map do |principalSchools| %>  <!-- Iterate thru the schools that the current principal works at-->
+      <% @teachers.each do |t| %>  <!-- Start looping thru all the teachers in the database -->
+          <% t.schools.map do |teacherSchools| %>  <!-- iterate thru the schools that this teacher works at -->
+              <% if teacherSchools == principalSchools %>  <!-- if a school that the teacher and the principal works at -->
+                  <tr>
+                    <td><%= teacherSchools.name %></td>
+                    <td><%= t.name %></td>
+                    <td><%= link_to "utvärdering", teacher_user_path(t.id) %></td>
+                  </tr>
+              <% end %> <!-- if teacherSchools == principalSchools end -->
+              <% end %><!-- teacherSchools iteration end -->
+          <% end %><!-- @users.each end-->
+      <% end %><!-- principalSchools iteration end -->
+  </tbody>
+</table>
+

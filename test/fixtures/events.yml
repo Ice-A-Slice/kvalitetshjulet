@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+principalEvent:
+  title: principal
+  comment: This is a principal event
+  datetime: 2014-03-11 10:00:00
+  User_id:
+  school_id: 4
+
+adminEvent:
+  title: admin
+  comment: This is a admin event
+  datetime: 2014-01-28 11:50:00
+  User_id: 64
+  school_id:

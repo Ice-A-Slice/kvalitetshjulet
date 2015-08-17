@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Olofströms Kvalitetshjul" %></title>
+
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag :modernizr %>
+    <%= include_gon %>
+
+    <%= csrf_meta_tags %>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  </head>
+
+  <body class='<%= controller.controller_name %>' data-controller="<%= params[:controller] %>">
+  <div id="notify" > </div>
+
+  <!-- Navbar -->
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li>
+        <%= link_to root_url do %>
+        <%= image_tag("logo.png", :alt => "logo", :class => "logo", :style => 'height: 36px; margin: 2px; margin-left: 15px;') %>
+        <% end %>
+      </li>
+
+      <% if session[:year_selected] %>
+
+      <li class="toggle-topbar menu-icon">
+        <a>Menu</a>
+      </li>
+
+
+      <% end %>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <!-- Load partial depending on user below -->
+
+      <ul class="left">
+
+        <% if session[:year_selected] %>
+          <%
+            arr = []
+            first_year = 2014
+            current_year = Date.today.year
+            loop do
+              arr.push current_year
+              current_year -= 1
+              break if current_year==first_year-1
+            end
+          %>
+          <li>
+            <div class="top-bar-select-year">
+              <span>År: </span>
+              <%= select_tag(:menu_select, options_for_select(arr, session[:year_selected]), {:onchange => "setYear(this)"}) %>
+              
+            </div>
+          </li>
+          
+
+        <% end %>
+      </ul>
+
+      <ul class="right">
+        <% if session[:user_type] != nil %>
+          <%= render "shared/#{session[:user_type]}_navbar" %>
+        <% end %>
+      </ul>
+      <!-- Left Nav Section -->
+      <!-- Load partial depending on user below -->
+      <!--<ul class="left">
+        <li><a href="#">Left Nav Button</a></li>
+      </ul>  -->
+    </section> 
+  </nav>
+
+	<!-- Main content -->
+  <section id="wrap" role="document">
+    <div class="row">
+      <div class="large-12 cols">
+        <%= yield%>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+ <footer id="footer" class="row">
+    <div class="">
+      <hr>
+      <p>Kvalitetshjulet är framtaget åt Olofströms kommun av webbutvecklingsstudenter på Blekinge tekniska högskola.</p>
+    </div>
+  </footer>
+
+
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

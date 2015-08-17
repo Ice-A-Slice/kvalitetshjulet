@@ -1,0 +1,10 @@
+$('#new_high_light').bind('ajax:complete', function(resp) {
+	$("#notify").html("Event was successfully created.")
+                .fadeIn("slow");
+    setTimeout(function(){$("#notify").fadeOut("slow");},5000);
+	$("#event_wrapper").html("<%= j render(:partial => 'high_lights/show') %>");
+
+    var color = '<%= @color %>';
+    wheel.rings.teacher.getWedgeById(selected_week).setColor(color);
+	Layers.teacher.draw();
+});

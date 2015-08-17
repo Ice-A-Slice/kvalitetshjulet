@@ -1,0 +1,29 @@
+<h1>Lägg till personal till <%= @workgroup.name %></h1>
+<%= form_for @userWorkgroup do |f| %>
+  <%= f.hidden_field(:workgroup_id, value: @workgroup.id) %>
+  <div class="row">
+    <div class="large-12 columns">
+      <table class="auto_size">
+        <thead>
+          <tr>
+            <th>Lägg till</th>
+            <th>Namn</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% @users.each do |u| %>
+            <tr>
+              <td><%= f.radio_button :user_id, u.id %></td>
+              <td><%= u.name %></td>
+              <td><%= u.email %></td>
+            </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= f.submit "Registrera personal", :class => "button tiny", style: 'margin-top: 20px; float: left; margin-right: 10px;' %>
+<% end %>

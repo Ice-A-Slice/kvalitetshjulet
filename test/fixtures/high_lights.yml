@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  week: 1
+  year: 1
+  color: 1
+  comment: MyText
+  user_id: 
+
+two:
+  week: 1
+  year: 1
+  color: 1
+  comment: MyText
+  user_id: 

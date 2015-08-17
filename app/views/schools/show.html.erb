@@ -1,0 +1,89 @@
+<% if @noticeE == 2 %>
+<p id="noticeerror"><%= notice %></p>
+<% else %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<div class="row">
+    <div class="large-12 columns">
+      <p></p>
+      <h2>Personal på <strong><%= @school.name %></strong> - <%= @school.district %></h2>
+    </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+        <h4 class="subheader">Sök på en person eller en epostadress</h4>
+  </div>
+</div>
+  <div class="row">
+    <div class="large-12 columns">
+          <table>
+          <thead>
+          <tr>
+            <th>Rektor</th>
+            <th>E-post</th>
+            <th class="list">Registrerad</th>
+            <th class="list">Ta bort</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @activePrincipals.each do |ap| %>
+              <% if ap.school_id == @school.id %>
+                  <% @principals.each do |p| %>
+                      <% if p.id == ap.user_id %>
+                          <tr>
+                            <td><%= p.name %></td>
+                            <td><%= p.email %></td>
+                            <td><%= (ap.updated_at).to_s[0, 11] %></td>
+                            <td><%= link_to 'Avregistrera', ap, method: :delete, data: { confirm: 'Är du säker på att du vill avregistera ' + p.name} %></td>
+                          </tr>
+                      <% end %>
+                  <% end %>
+              <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      <br/>
+       <p><%= link_to 'Registera rektor på skolan', school_add_principal_path(@school), :class => 'button tiny', style: 'color: white; margin-top: 20px;' %></p>
+    </div>
+ </div>
+  <div class="row">
+  <div id="second" class="large-12 columns">
+      <table>
+      <thead>
+      <tr>
+        <th>Personal</th>
+        <th>E-post</th>
+        <th class="list">Registrerad</th>
+        <th class="list">Ta bort</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @activeTeachers.each do |at| %>
+          <% if at.school_id == @school.id %>
+              <% @teachers.each do |t| %>
+                  <% if t.id == at.user_id %>
+                      <tr>
+                        <td><%= t.name %></td>
+                        <td><%= t.email %></td>
+                        <td><%= (at.updated_at).to_s[0, 11] %></td>
+                        <td><%= link_to 'Avregistrera', at, method: :delete, data: { confirm: 'Är du säker på att du vill avregistera ' + t.name } %></td>
+                      </tr>
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <br/>
+
+      <p><%= link_to 'Registera personal på skolan', school_add_teacher_path(@school), :class => 'button tiny', style: 'color: white; margin-top: 20px;' %></p>
+
+  </div>
+</div>
+<% if current_user.user_type == "admin" %>
+  <%= link_to 'Redigera skolan', edit_school_path(@school), class: 'button tiny', style: 'color: white; margin-top: 20px; margin-right: 5px;' %>
+<% end %>
+<%= link_to 'Tillbaka', schools_path, class: 'button tiny back' %>
+
+

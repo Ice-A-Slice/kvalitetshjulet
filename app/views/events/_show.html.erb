@@ -1,0 +1,32 @@
+<h3>Vecka <%= @week.to_i+1 %></h3>
+<hr>
+<% can_add_event = false %>
+<% @events.each do |event| %>
+    <div class='content'>
+        <b><%= event.title %></b><div class="event_color" style="background-color:<%= event.event_type.present? ? event.event_type.color : event.dot_color %>;"></div>
+        <%= if event.workgroup.present?; tag(:br) + "Arbetsgrupp: #{event.workgroup.name}" end %>
+        <br/>
+        <i><%= l event.datetime, format: :short %></i><br/><br/>
+        <%= simple_format(auto_link(event.comment)) %><br/>
+
+        <% if event.file.present? %>
+            Bifogad fil: <%= link_to 'ladda ner' ,event.file.url %>
+            <br/>
+        <% end %>
+        <br/>
+
+        <% # Sets so that only a user with the same usertype or has the same school can see the edit- and remove- buttons  %>
+        <% isPrincipal = (event.school_id.present? and current_user.schools.map{|a| a.id}.include? event.school_id and current_user.user_type == 'principal') %>
+        <% isTeacher = (event.user_id.present? and current_user.id == event.user_id and current_user.user_type == 'teacher') %>
+        <% if isPrincipal or isTeacher or (event.user_id.present? and @usersWithSameUsertypeAsCurrentUser.map{|a| a.id}.include? event.user_id and current_user.user_type == "admin") %>
+          <%= button_tag 'Redigera', :data => { editevent: "sessions/edit_week_event/#{event.id}" }, :class => 'unbind_click button tiny', style: 'margin-right: 5px;' %>
+          <%= link_to 'Ta bort', event_path(event.id), method: :delete, remote: true, :class => 'button tiny back', onclick: 'deleteEvent(this);' %>
+          <% can_add_event = true; %>
+        <% end %>
+    </div>
+<% end %>
+<hr/>
+<% if can_add_event %>
+    <% side_to_load = "sessions/new_week_event/#{@week}/#{@events[0].ring_name}" %>
+    <%= button_tag 'Lägg till event', :data=> { editevent: side_to_load }, :class => 'button tiny', style: 'margin-top: 10px;' %>
+<% end %>

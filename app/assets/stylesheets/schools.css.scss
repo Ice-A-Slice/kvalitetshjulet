@@ -1,0 +1,19 @@
+// Place all the styles related to the Schools controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.schools {
+
+  table:not(.auto_size) {
+  	tr> *:first-child {
+      width: 380px;
+  	}
+
+  	tr {
+
+  		th:nth-child(2) {
+  			width:90px;
+  		}
+  	}
+  }
+	
+}

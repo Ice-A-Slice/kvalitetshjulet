@@ -1,0 +1,2 @@
+module Juror::UsersHelper
+end

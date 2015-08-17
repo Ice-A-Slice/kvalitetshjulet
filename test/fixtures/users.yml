@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Pelle Principal
+  email: pelle@principal.se
+  user_type: principal
+
+two:
+  name: Ted Teacher
+  email: ted@teacher.se
+  user_type: teacher

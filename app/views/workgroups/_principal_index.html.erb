@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th>Namn</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workgroups.each do |workgroup| %>
+      <tr>
+        <td><%= workgroup.name %></td>
+        <td><%= link_to 'Lägg till personal', workgroup %></td>
+        <td><%= link_to 'Redigera', edit_workgroup_path(workgroup) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Ny Arbetsgrupp', new_workgroup_path, :class => 'button tiny' %>

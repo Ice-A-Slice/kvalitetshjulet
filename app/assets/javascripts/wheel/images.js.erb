@@ -1,0 +1,68 @@
+   ////////////////////////////////////////////
+  // Function to create images              //
+ // Grund: Shining                         //
+////////////////////////////////////////////
+
+function imagemaker(layer){
+    if (gon.school_image_url != '') {
+        loadCenterImage(gon.school_image_url, layer);
+    } else {
+        //loadCenterImage('/assets/4JGD.jpg');
+        <% image_path = asset_path '4JGD.jpg' %>
+        loadCenterImage('<%= image_path %>', layer);
+    }
+    //imageLoader('/assets/week_month_bg.png', 1, 5, 632, 625);
+    <% image_path = asset_path 'week_month_bg.png' %>
+    imageLoader('<%= image_path  %>', 1, 5, 632, 625, layer);
+}
+
+   ////////////////////////////////////////////
+  // Function to load images                //
+ // Grund: Shining                         //
+////////////////////////////////////////////
+function imageLoader(url, xPos, yPos, iWidth, iHeight, layer) {
+    var centerObj = new Image();
+    centerObj.src = url;
+    centerObj.onload = function() {
+        var centerImage = new Kinetic.Image( {
+            x: xPos,
+            y: yPos,
+            image: centerObj,
+            width: iWidth,
+            height: iHeight,
+            radius: 100
+        });
+        layer.add(centerImage);
+        layer.draw();
+    };
+}
+   ////////////////////////////////////////////
+  // Function to load center image          //
+ // Grund: Alfred                          //
+////////////////////////////////////////////
+function loadCenterImage(url, layer) {
+    var centerObj = new Image();
+    centerObj.src = url;
+
+    centerObj.onload = function() {
+        var img_width = this.width;
+        var img_height = this.height;
+        var scale;
+        if (img_height < img_width) {
+            scale = 240 / img_height;
+        } else {
+            scale = 240 / img_width
+        }
+        var imageCircle = new Kinetic.Circle( {
+            x: 320,
+            y: 320,
+            radius: 120,
+            fillPatternImage: centerObj,
+            fillPatternOffset: ({ x : -img_width / 2, y : img_height / 2 }),
+            fillPatternScale: ({ x : scale, y : scale })
+        });
+        layer.add(imageCircle);
+        layer.draw();
+    };
+
+}

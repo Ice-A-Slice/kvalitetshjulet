@@ -1,0 +1,7 @@
+<div class="row">
+  <p></p>
+    <h4>Profil för användaren <strong><%= @user.name %></strong></h4>
+  <p></p>
+  <%= render partial: "formCreateStaff", :object =>  { user: @user }  %>
+</div>
+

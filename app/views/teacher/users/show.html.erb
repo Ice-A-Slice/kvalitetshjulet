@@ -1,0 +1,54 @@
+<h1 class="profil">Profil</h1>
+<hr/>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Namn:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+
+<%= link_to 'Redigera', edit_teacher_user_path(@user), class: 'button tiny', style: 'color: white; margin-top: 20px; margin-right: 5px;' %>
+<% if current_user.user_type != "teacher" %>
+<%= link_to 'Tillbaka', teacher_users_path, class: 'button tiny back', style: 'color: white; margin-top: 20px;' %>
+<% end %>
+
+<% if false %>
+
+<% if @user.name.at(-1) == "s" %>
+	<h3 class="profil"><%= @user.name %> Belastning</h3>
+<% else %>
+	<h3 class="profil"><%= @user.name %>s Belastning</h3>
+<% end %>
+<hr/>
+<table>
+  <thead>
+    <tr>
+      <th>Vecka</th>
+      <th>Belastning</th>
+      <th>Aktivitet</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hl.each do |hl| %>
+      <tr>
+        <td><%= hl.week %></td>
+        <td>
+          <div style="float:left; margin-top: 4px; margin-right: 7px; border: 1px solid gray; height: 10px; width:30px; background-color: <%= @color[hl.color] %> "></div>
+          <%= @color_swedish[hl.color].capitalize %>
+          </td>
+        <td><%= hl.comment %></td>
+      </tr>				
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+

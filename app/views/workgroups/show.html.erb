@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @workgroup.name %>
+</h1>
+<div class="row">
+  <div class="large-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th>Namn</th>
+          <th>Registrerad</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @usersInWorkgroup.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user %></td>
+            <% uw = user.user_workgroups.find_by(workgroup: @workgroup) %>
+            <td><%= (uw.updated_at).to_s[0, 11] %></td>
+            <td><%= link_to 'Avregistrera', uw, method: :delete, data: { confirm: "Är du säker på att du avregistrera #{user.name} ifrån arbetsgruppen #{@workgroup.name}?" } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'Registrera ny personal till arbetsgrupp', workgroup_add_user_path(@workgroup), :class => 'button tiny', style: 'color: white; margin-top: 20px;' %>
+    <br>
+    <%= link_to '<- Tillbaka till alla arbetsgrupper', workgroups_path %>
+  </div>
+</div>
+
+

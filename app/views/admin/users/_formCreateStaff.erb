@@ -1,0 +1,27 @@
+<%= form_for [:admin, @user] do |f| %>
+    <div class="large-6 small-12">
+        <h4>
+          <span data-tooltip class="has-tip" title="Du är administratör, och har tillgång till alla applikationens verktyg och delar.">
+             <strong>Administratör</strong>
+          </span>
+        </h4>
+
+        <div class="field">
+            <%= f.label(:namn) %>
+            <%= f.text_field(:name) %>
+        </div>
+
+        <div class="field">
+            <%= f.label(:email) %>
+            <%= f.text_field(:email) %>
+        </div>
+
+        <div class="field">
+            <%= f.label :user_type, 'Roll' %>
+            <%= f.select(:user_type, options_for_select([['Rektor', 'principal'], ['Personal', 'teacher'], ['Administratör', 'admin']], 'admin')) %>
+        </div>
+
+        <%= f.submit "Uppdatera administratören" ,:class => "button tiny" %>
+    </div>
+<% end %>
+

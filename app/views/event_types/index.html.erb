@@ -1,0 +1,36 @@
+<h1>Aktivitetstyper</h1>
+
+<div id="notices">
+    <% flash.each do |name, msg| -%>
+        <div class="<%= name %>">
+            <%= msg %>
+            <button class="close-notice" onclick="hideThis(this);">x</button>
+        </div>
+    <% end -%>
+</div>
+
+<div class="row">
+  <% @event_types.each do |event_type| %>
+  <div class="large-3 medium-4 small-6 tiny-12 columns event-type-box">
+    <div class="panel">
+      <h3 class="text-center"><%= event_type.name %></h3>
+      <div class="row spacing">
+        <div class="color-box" data-color="<%= event_type.color %>"></div>
+      </div>
+      <div class="bottom">
+        <%= link_to 'Ändra', edit_event_type_path(event_type), class: "button tiny"  %>
+        <%= link_to 'Ta bort', event_type, method: :delete, class: "button alert tiny right", data: { confirm: 'Är du säker på att du vill ta bort Aktivitetstypen?' } %>
+        <!-- <%= link_to 'Ta bort', remove_event_type_path(event_type), class: "button alert tiny right", data: { confirm: 'Är du säker på att du vill ta bort Aktivitetstypen?' } %> -->
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <%= link_to new_event_type_path, class: 'large-2 medium-4 small-6 tiny-12 columns left add-event-type' do %>
+    <div class="panel"><div class="text-center add-icon fi-plus"></div></div>
+  <% end %>
+</div>
+  
+<br>
+
+<%= link_to '< Tillbaka till Hjulet', sessions_path  %>

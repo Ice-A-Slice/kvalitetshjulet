@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vecka:</strong>
+  <%= @high_light.week %>
+</p>
+
+<p>
+  <strong>År:</strong>
+  <%= @high_light.year %>
+</p>
+
+<p>
+  <strong>Färg:</strong>
+  <%= @high_light.color %>
+</p>
+
+<p>
+  <strong>Kommentar:</strong>
+  <%= @high_light.comment %>
+</p>
+
+<p>
+  <strong>Roll:</strong>
+  <%= @high_light.user %>
+</p>
+
+<%= link_to 'Redigera', edit_high_light_path(@high_light), class: 'button tiny', style: 'color: white; margin-top: 20px;' %> |
+<%= link_to 'Tillbaka', high_lights_path, class: 'button tiny back', style: 'color: white; margin-top: 20px;' %>
+<%= button_tag 'Lägg till utvärdering', :data=> { editevent: "sessions/new_high_lights/#{@week}" }, :class => "button", style: 'margin-top: 20px;'%>

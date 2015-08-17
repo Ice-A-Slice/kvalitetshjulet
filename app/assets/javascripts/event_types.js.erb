@@ -1,0 +1,8 @@
+//= require jquery.minicolors
+
+$('.color-box[data-color]').each(function() {
+    var $this = $(this);
+    $this.css('background-color', $this.data('color'));
+});
+
+$('input[data-type="color-picker"]').minicolors()

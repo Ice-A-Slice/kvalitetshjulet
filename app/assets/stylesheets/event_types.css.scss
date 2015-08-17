@@ -1,0 +1,115 @@
+// Place all the styles related to the eventTypes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*
+ *= require jquery.minicolors
+ */
+
+.event_types {
+
+
+    .event-type-box {
+        font-size: 1.2em;
+
+        .button {
+            margin: 0;
+        }
+
+        .color-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            border: 1px solid #000;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .spacing {
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+
+        a {
+            color: #fff;
+            &:visited {color:#fff}
+        }
+    }
+
+    .add-event-type {
+        display: block;
+        font-size: 80px;
+        .panel {
+            -webkit-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+            &:hover {
+                background-color: #eee;
+            }
+        }
+    }
+
+    .color-picker {
+        .minicolors-swatch {
+            width: 30px;
+            height: 30px;
+        }
+        input {
+            padding: 20px;
+            padding-left: 40px;
+        }
+    }
+
+
+
+    #notices {
+        position: absolute;
+        top: -50px;
+        width: 100%;
+
+        .notice {
+            position: absolute;
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #F08A24;
+            border-radius: 5px;
+            background-color: #DE770F;
+            color: #fff;
+            float: left;
+        }
+            
+        .close-notice {
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            overflow: hidden;
+            float: left;
+            background-color: rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,0,0,0.1);
+            line-height: 10px;
+            text-align: center;
+            font-size: 14px;
+            margin: 0 10px 0 0;
+            padding: 0;
+            border-radius: 2px;
+            content: '×';
+            cursor: pointer;
+            display: block;
+            &:hover {
+                background-color: rgba(0,0,0,0.2);
+            }
+        }
+    }
+
+    .remove-form.row {
+        padding-top: 20px;
+    }
+
+    
+}
+@media screen and (max-width: 420px) {
+    .event_types {   
+        .tiny-12 {
+            width: 100%;
+        }
+    }
+}

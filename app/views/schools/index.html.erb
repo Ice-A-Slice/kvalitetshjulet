@@ -1,0 +1,46 @@
+<br />
+<h4>Lista över skolor</h4>
+<div class="field">
+<table>
+  <thead>
+    <tr>
+      <th>Skolor</th>
+      <th class="list">Lägg till personal</th>
+      <th class="list">Redigera</th>
+      <th class="list">Ta bort</th>
+    </tr>
+  </thead>
+
+  <tbody>
+   
+    <% @schools.each do |school| %>
+      <%if current_user.user_type=="principal" %>
+        <% current_user.schools.map do |yourSchools| %>
+          <% if yourSchools.id == school.id %>
+                  <tr class="user" id="asset_<%= school.id %>">
+                    <td><%= school.name %>  (<%= school.district %> län)</td>
+                    <td><%= link_to 'Lägg till personal', school %></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+          <%end %>
+        <%end%>
+
+      <% elsif current_user.user_type=="admin" %>
+          <tr class="user" id="asset_<%= school.id %>">
+            <td><%= school.name %>  (<%= school.district %> län)</td>
+            <td><%= link_to 'Lägg till personal', school %></td>
+            <td><%= link_to 'Redigera', edit_school_path(school) %></td>
+            <td> <%= link_to 'Ta bort', school_path(school) , method: :delete,
+                             data: {confirm: "Är du säker på att du vill ta bort skolan?"}, remote: true %> <br/>
+            </td>
+          </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+<% if current_user.user_type == "admin" %>
+  <%= link_to 'Lägg till skola', new_school_path, class: 'button tiny', style: 'color: white; margin-top: 20px;' %>
+<% end %>

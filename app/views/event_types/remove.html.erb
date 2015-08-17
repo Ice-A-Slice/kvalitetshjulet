@@ -1,0 +1,54 @@
+<h1>Ta bort <b><%= @event_type.name %></b> - Aktivitetstyp</h1>
+<h2></h2>
+<%= form_for(@event_type, method: :delete) do %>
+  <% if @event_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @event_type.errors.count %> fel stoppade aktivitetstypen från att sparas:</h2>
+
+      <ul>
+      <% @event_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="remove-form field row">
+    <div class="large-8 medium-10 small-12 columns">
+      <h3>Det finns <%= @event_type.events.count %> aktivitet<%= 'er' if @event_type.events.count != 1 %> som är av denna typ.</h3>
+      <table data-escape="dataTable">
+        <thead>
+          <tr>
+            <th>Titel</th>
+            <th>Senast ändrad</th>
+            <th>Kommentar</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @event_type.events.each do |e| %>
+          <tr>
+            <td><%= e.title %></td>
+            <td><%= e.updated_at.strftime('%b %d, %Y') %></td>
+            <td><%= truncate(strip_tags(e.comment)) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="remove-form row">
+    <div class="field large-8 medium-10 small-12 columns">
+      <%= label_tag :event, 'Ändra samtliga aktiviteters typ till:' %><br>
+      <%= collection_select(:event, :type_id, @other_event_types, :id, :name, :required => true ) %>
+    </div>
+  </div>
+
+
+  <div class="remove-form row">
+    <div class="actions large-8 medium-10 small-12 columns">
+      <%= link_to 'Avbryt', event_types_path, class: 'button tiny warn left' %> <%= submit_tag 'Ta bort Aktivitetstypen', class: 'button tiny right' %> 
+    </div>
+  </div>
+
+
+<% end %>

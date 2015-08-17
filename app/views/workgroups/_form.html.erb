@@ -1,0 +1,27 @@
+<%= form_for(@workgroup) do |f| %>
+  <% if @workgroup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workgroup.errors.count, "error") %> prohibited this workgroup from being saved:</h2>
+
+      <ul>
+      <% @workgroup.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, :required => true %><br>
+    <%= f.text_field :name %>
+  </div>
+
+    <%= f.label :school_id, 'Skola' %><br>
+    <%= f.collection_select(:school_id, current_user.schools, :id, :name) %>
+    <%= f.hidden_field :user_id, :value => "" %>
+
+  <div class="actions">
+    <% text = @workgroup.name.present? ? 'Uppdatera' : 'Skapa' %>
+    <%= f.submit text + ' Arbetsgrupp', :class => 'button tiny' %>
+  </div>
+<% end %>

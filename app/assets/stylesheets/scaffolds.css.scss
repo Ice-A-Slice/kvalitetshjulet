@@ -1,0 +1,67 @@
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+#notice {
+  color: green;
+}
+
+#noticeerror {
+  color: red;
+}
+
+
+.field_with_errors {
+  #school_name{
+    padding: 2px;
+    border: 3px solid red;
+  }
+  
+}
+
+#error_explanation {
+  width: 450px;
+  border: 1px solid #BABABA;
+  border-radius: 5px;
+  padding: 5px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: #FAFAFA;
+  box-shadow: 5px 5px 3px #888888;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 13px;
+    font-size: 15px;
+    margin: -7px;
+    margin-bottom: 0px;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+    margin-left: 15px; 
+  }
+}

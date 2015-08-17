@@ -1,0 +1,2 @@
+module HighLightsHelper
+end

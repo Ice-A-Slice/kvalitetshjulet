@@ -1,0 +1,57 @@
+<!-- CURRENT USER NAME -->
+  <li class="active" style="height: 45px;">
+    <div style="font-size:18px; line-height: 45px; color: #ededed;">
+      <div class="separator" style="padding-right: 12px; margin-right: -1px;"><%= session[:user_name] %>
+      </div>
+    </div>
+  </li>
+
+<!-- BACK TO WHEEL -->
+  <li class="active" style="height: 45px;">
+    <div style="font-size:18px; line-height: 45px;">
+      <div class="separator"><%= link_to 'Hjulet', root_url, :style => "padding-top: 7px; padding-bottom: 7px;"%>
+      </div>
+    </div>
+  </li>
+
+<!-- HELP -->
+  <li class="active" style="height: 45px;">
+    <div style="font-size:30px; line-height: 45px;">
+      <div class="separator">
+        <a data-reveal-id="myModal" style="color: #ededed; padding-left: 15px; padding-right: 16px;" data-reveal><strong>?</strong></a>
+      </div>
+      <%= render "shared/tutorial" %>
+    </div>
+  </li>
+
+<!-- PRINT -->
+  <li class="active" style="height: 45px;">
+    <div style="font-size:30px; line-height: 45px;">
+      <div class="separator">
+        <a onclick="window.print();return false;" style="color: #ededed; padding-left: 15px; padding-right: 16px;">
+          <i class="step fi-print size-72"></i>
+        </a>
+      </div>
+    </div>
+  </li>
+
+<!-- PROFILE -->
+  <li class="has-dropdown">
+    <div style="font-size:30px; line-height: 45px;  margin-right: 5px;">
+      <div class="separator">
+        <a style="color: #ededed; padding-left: 15px; padding-right: 15px;">
+          <i class="step fi-torso size-72"></i>
+        </a>
+      </div>
+    </div>
+    <ul class="dropdown" style="margin-right:8px;">
+      <!-- GET USER ID FROM SESSION -->
+      <li>
+        <div class="insethax" style="width: 126px;">
+        </div>
+        <%= link_to 'Min profil', "/juror/users/#{session[:user_id]}/edit" %>
+      </li>
+      <!-- DESTROY SESSION -->
+      <li><%= link_to 'Logga ut', signout_path %></li>
+    </ul>
+  </li>

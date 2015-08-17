@@ -1,0 +1,27 @@
+// Place all the styles related to the Workgroups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.workgroups {
+
+  table:not(.auto_size) {
+    tr> *:first-child {
+      width: 380px;
+    }
+
+    tr {
+
+      th {
+        width:90px;
+      }
+    }
+
+
+  }
+  
+  .pull-right {
+    float: right;
+  }
+  .pull-left {
+    float: left;
+  }
+}

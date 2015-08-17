@@ -1,0 +1,7 @@
+<h1>Arbetsgrupper</h1>
+<%=
+  # If current user is admin, render the admin index, otherwise render the one for principals 
+  render current_user.user_type == 'admin' ? 'admin_index' : 'principal_index' 
+  # For now, only principals can access workgroups
+
+%>

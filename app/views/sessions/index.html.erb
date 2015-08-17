@@ -1,0 +1,90 @@
+
+
+<div class="row position-relative">
+    <% if current_user %>
+    <% # the toggle-animation for the whole wheel is bound to data-container %>
+    <div id="outer-wheel-container" class="large-12 medium-12 small-12 columns" data-container>
+        <div id="eventViews"></div>
+        <div id="wheel_container"></div>
+        <div class="hideOnLoad">
+            <div id="eventTitles">
+                <div class="eventTitleTable">
+                    <div class="titleContainer">
+                        <table data-escape="dataTable">
+                            <tr>
+                                <td><div class="marker"></div></td>
+                                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="outer-event-container" class="large-3 medium-12 small-6">
+        <div id="ev_wrap" class="large-12 medium-6">
+            <div id="event_wrapper"></div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+<!-- <div id="notices">
+    <% flash.each do |name, msg| -%>
+        <div class="<%= name %>">
+            <%= msg %>
+            <button class="close-notice" onclick="hideThis(this);">x</button>
+        </div>
+    <% end -%>
+</div> -->
+
+<% else %>
+<div class="row">
+  <div class="large-4 large-offset-4 columns" id="loginbox"><h3> Logga in med ditt googlekonto </h3>
+    <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", :class => "google-login button [radius round]" %>
+    <h4><%= notice %></h4>
+  </div>
+</div>
+<% end %>
+
+<style>
+    @media print {
+        #myModal,
+        #eventViews,
+        #footer,
+        #event_wrapper,
+        #wrapper,
+        .top-bar-section,
+        .toggle-topbar {
+            display: none;
+        }
+        #wheel_container {
+            margin:0px;
+            padding:0px;
+        }
+        .title-area {list-style: none;}
+    }
+</style>
+
+<script>
+  function prepareprint(){
+    if ($('.kineticjs-content').css('marginLeft') === '0px') {
+        $('canvas').css({'width' : '96%'});
+        $('canvas').css({'height' : '96%'});
+        $('canvas').css({'margin-left' : '10%'});
+        window.print();
+        $('canvas').css({'margin-left' : '0%'});
+    } else {
+        $('canvas').css({'width' : '140%'});
+        $('canvas').css({'height' : '140%'});
+        $('canvas').css({'margin-left' : '-41%'});
+        window.print();
+        $('canvas').css({'margin-left' : '0%'});
+    }
+    $('canvas').css({'width' : '100%'});
+    $('canvas').css({'height' : '100%'});
+  }
+</script>
+<!--Last marked week-->
+<p id = "mark" style = "display: none;" >1/admin</p>

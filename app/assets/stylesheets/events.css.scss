@@ -1,0 +1,53 @@
+// Place all the styles related to the Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.events {
+	
+	
+}
+
+.jColorSelect {
+  overflow: hidden; /* for IE6 */
+  border: 1px solid #d9dcdd;
+  padding: 10px;
+  padding-bottom: 0;
+  width: 100%;
+}
+
+.color_block {
+  cursor: pointer;
+}
+
+.jColorSelect p {
+  display: inline-block;
+  height: 38px;
+  line-height: 30px;
+  padding: 0;
+  margin: 0;
+  padding-left: 0.2em;
+}
+
+.jColorSelect > .color_block > div{
+  background: image-url("colorpickers.gif") no-repeat;
+  width: 25px;
+  height: 25px;
+  overflow: hidden; /* for IE6 */
+  border: 1px solid #666666;
+  margin: 1px;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  float: left;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.jColorSelect > .color_block > .checkwht {
+  cursor: default;
+  background-position: -26px 0;
+}
+.jColorSelect > .color_block > .checkblk {
+  cursor: default;
+  background-position: -53px 0;
+}

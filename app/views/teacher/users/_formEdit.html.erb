@@ -1,0 +1,51 @@
+<%= form_for [:teacher, @user] do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <% if msg.include? 'confirmation ' %>
+                  <li><%= msg.gsub!('confirmation ','') %></li>
+              <% else %>
+                  <li><%= msg %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+      <h3>Redigera personal</h3>
+      <h4 class="subheader">Här kan du redigera personal</h4>
+      <br />
+      <div class="field">
+        <%= f.label :namn %>
+        <%= f.text_field :name, :required => true %>
+      </div>
+      <div class="field">
+        <%= f.label :email, "Ny email" %>
+        <%= f.text_field :email, :required => true %>
+      </div>
+      <div class="field">
+        <%= f.label :email_confirmation, "Bekräfta din nya mailadress" %>
+        <%= f.text_field :email_confirmation, :required => true %>
+      </div>
+      <div class="field">
+        <% if current_user.user_type == 'admin' %>
+            <%= f.label :user_type, 'Roll' %>
+            <%= f.select(:user_type, options_for_select([['Rektor', 'principal'], ['Personal', 'teacher'], ['Administratör', 'admin']], 'teacher')) %>
+        <% else %>
+            <%= f.hidden_field :user_type, :value=> 'teacher' %>
+        <% end %>
+      </div>
+      <div class="actions" style="float: left; margin-right: 10px;">
+
+        <%= f.submit "Uppdatera", :class => "button tiny" %>
+        <% if current_user.user_type != "teacher" %>
+          <%= link_to 'Tillbaka', teacher_users_path, class: 'button tiny back', style: 'color: white' %>
+        <% else %>
+          <%= link_to 'Tillbaka', teacher_user_path(current_user), class: 'button tiny back', style: 'color: white' %>
+        <% end %>
+        
+
+      </div>
+<% end %>

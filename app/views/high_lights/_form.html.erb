@@ -1,0 +1,41 @@
+<%= form_for(@high_light) do |f| %>
+  <% if @high_light.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@high_light.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+
+      <ul>
+      <% @high_light.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :vecka %><br>
+    <%= f.number_field :week, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :år %><br>
+    <%= f.number_field :year, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :belastning %><br>
+    <%= f.number_field :color, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :kommentar %><br>
+    <%= f.text_area :comment, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :roll %><br>
+    <%= f.text_field :user_id, :required => true %>
+  </div>
+    <div class="actions" style="float: left; margin-right: 10px;">
+      <% if params[:action] == 'new' %>
+          <%= f.submit "Lägg till", :class => "button tiny", style: 'margin-top: 20px;' %>
+      <% else %>
+          <%= f.submit "Uppdatera", :class => "button tiny", style: 'margin-top: 20px;' %>
+      <% end %>
+    </div>
+<% end %>

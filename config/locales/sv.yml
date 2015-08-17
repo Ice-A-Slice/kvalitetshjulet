@@ -1,0 +1,80 @@
+sv: 
+  date: 
+    abbr_day_names: 
+      - sön
+      - mån
+      - tis
+      - ons
+      - tor
+      - fre
+      - lör
+    abbr_month_names: 
+      - ~
+      - jan
+      - feb
+      - mar
+      - apr
+      - maj
+      - jun
+      - jul
+      - aug
+      - sep
+      - okt
+      - nov
+      - dec
+    day_names: 
+      - Söndag
+      - Måndag
+      - Tisdag
+      - Onsdag
+      - Torsdag
+      - Fredag
+      - Lördag
+    formats: 
+      default: "%Y-%m-%d"
+      long: "%e %B, %Y"
+      short: "%e %b"
+    month_names: 
+      - ~
+      - januari
+      - februari
+      - mars
+      - april
+      - maj
+      - juni
+      - juli
+      - augusti
+      - september
+      - oktober
+      - november
+      - december
+    order: 
+      - !ruby/symbol day
+      - !ruby/symbol month
+      - !ruby/symbol year
+  time: 
+    am: ""
+    formats: 
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%d %B, %Y %H:%M"
+      short: "%A, den %d/%m/%Y"
+    pm: ""
+
+  activerecord: 
+    errors: 
+      models: 
+        school: 
+          attributes: 
+            name: 
+              blank: "kan inte vara tomt"
+        user: 
+          attributes: 
+            email: 
+              blank: "kan inte vara tomt"
+              invalid: "är inte giltig"
+              taken: "är redan tagen"
+              too_long: "får max innehålla 60 tecken"
+            email_confirmation: 
+              confirmation: "matchar inte"
+            name: 
+              blank: "kan inte vara tomt"

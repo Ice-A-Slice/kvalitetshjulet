@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+<%= form_for [:juror, @user] do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <% if msg.include? 'confirmation ' %>
+                  <li><%= msg.gsub!('confirmation ','') %></li>
+              <% else %>
+                  <li><%= msg %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+<%end %>
+<%= form_for [:juror, @user] do |f| %>
+   <h3>Lägg till en ny nämndeman</h3>
+    <h4 class="subheader">Som nämndeman kommer du kunna läsa av årets händelser på hjulet, och ta del av alla events som
+    publiceras på hjulet.</h4>
+    <div class="field">
+      <%= f.label :name, "Namn" %>
+      <%= f.text_field :name, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.label :email, "Email" %>
+      <%= f.text_field :email, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.label :email_confirmation, "Bekräfta mailadress" %>
+      <%= f.text_field :email_confirmation, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :user_type, :value=> "juror" %>
+    </div>
+      <%= f.submit "Skapa nämndeman", :class => "button tiny" %>
+
+      <%= link_to 'Tillbaka', juror_users_path, class: 'button tiny back', style: 'color: white' %>
+
+<% end %>

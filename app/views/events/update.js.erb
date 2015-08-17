@@ -1,0 +1,41 @@
+$('.edit_event').unbind('ajax:complete').bind('ajax:complete', function(resp) {
+	$("#notify").html("Händelsen har uppdaterats.");
+    $("#notify").fadeIn("slow");
+    setTimeout(function(){$("#notify").fadeOut("slow");},5000);
+    var usertype = '<%= @user.user_type %>';
+    var week = $($(resp.target)[0]).find("#event_week")[0].value;
+    edit_week = parseInt('<%= @event.week %>');
+    var type;
+    <% if @adminOnJuror == 'juror' %>
+        type = 'juror';
+    <% elsif @owner.attributes.has_key?('user_type')  %>
+        type = '<%= @owner.user_type %>';
+    <% else %>
+        type = '<%= @owner.id %>';
+    <% end %>
+    loadSideWithAjax('sessions/show_week_events/'+week+'/'+type);
+    // <% if current_user.user_type == 'admin' &&  @adminOnJuror == 'juror' %>
+    //     var ringname = 'juror';
+    // <% else %>
+    //     var ringname = '<%= current_user.user_type %>';
+    // <% end  %>
+
+    var ringName = '<%= @event.ring_name %>',
+        fromColor = '<%= @pre_color %>',
+        toColor = '<%= @event.event_type.color %>',
+        fromTitle = '<%= @old_title %>',
+        toTitle = '<%= @event.title %>';
+
+    wheel.getWedge(ringName, edit_week)
+        .update({
+            from: {
+                color: fromColor,
+                title: fromTitle
+            },
+            to: {
+                color: toColor,
+                title: toTitle
+            }
+        });
+    wheel.redrawRing(ringName);
+});

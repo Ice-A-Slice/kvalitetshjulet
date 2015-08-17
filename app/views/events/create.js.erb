@@ -1,0 +1,37 @@
+$('#new_event').bind('ajax:complete', function(resp) {
+	$("#notify").html("Händelsen har skapats.")
+                .fadeIn("slow");
+    setTimeout( function() { $("#notify").fadeOut("slow"); }, 5000);
+
+    var type,
+        ringName = '<%= @event.ring_name %>',
+        eventColor = '<%= @event.event_type.color %>',
+        eventTitle = '<%= @event.title %>',
+        week = parseInt(<%= @event.week %>);
+
+    <% if @adminOnJuror == 'juror' %>
+        type = 'juror';
+    <% elsif @owner.attributes.has_key?('user_type')  %>
+        type = '<%= @owner.user_type %>';
+    <% else %>
+        type = '<%= @owner.id %>';
+    <% end %>
+    loadSideWithAjax('sessions/show_week_events/'+week+'/'+type);
+    
+    $('.eventMarker').each(function() {
+        $this = $(this);
+        if ($this.css("background-color") == 'rgb(255, 255, 255)') {
+            $this.click();
+        }
+    });
+
+    wheel.createEvent({
+        ringName: ringName,
+        week: week,
+        events: [{
+            color: eventColor,
+            title: eventTitle
+        }]
+    }).redrawRing(ringName);
+});
+

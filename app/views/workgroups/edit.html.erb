@@ -1,0 +1,8 @@
+<h1>Redigera Arbetsgrupp</h1>
+
+<%= render 'form' %>
+
+
+<%= link_to 'Bakåt', workgroups_path, :class => 'pull-left' %>
+
+<%= link_to 'Ta bort Arbetsgruppen', @workgroup, :class => 'button tiny alert pull-right', method: :delete, data: { confirm: 'Är du säker på att du vill ta bort arbetsgruppen?' } %>

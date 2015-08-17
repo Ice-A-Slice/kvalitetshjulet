@@ -1,0 +1,45 @@
+<h1 class="profil">Profil</h1>
+<hr />	
+
+		<p>
+		  <strong>Namn:</strong>
+		  <%= @user.name %>
+		</p>
+
+		<p>
+		  <strong>Email:</strong>
+		  <%= @user.email %>
+		</p>
+
+
+
+<br />
+
+	<% if @user.name.at(-1) == "s" %>
+	<h3 class="profil"><%= @user.name %> Events</h3>
+	<% else %>
+	<h3 class="profil"><%= @user.name %>s Events</h3>
+	<% end %>
+	<hr/>
+	<table>
+		<thead>
+			<tr>
+			    <th>Title</th>
+			    <th>kommentar</th>
+			    <th>Vecka</th>
+			    <th>Datum</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @event.each do |e| %>
+				<tr>
+					<td><%= e.title %></td>
+					<td><%= e.comment %></td>
+					<td><%= e.week %></td>
+					<td><%= e.datetime.to_s.to(10) %></td>
+				<% end %>
+				</tr>				
+		</tbody>
+	</table>
+

@@ -1,0 +1,19 @@
+<h1 class="profil">Profil</h1>
+<hr/>
+
+<div class="profilewrapper">
+<p>
+  <strong>Namn:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+
+</div>
+
+<%= link_to 'Redigera', edit_juror_user_path(@user), class: 'button tiny', style: 'color: white; margin-top: 20px; margin-right: 5px;' %>
+<%= link_to 'Tillbaka', juror_users_path, class: 'button tiny back', style: 'color: white; margin-top: 20px;' %>

@@ -1,0 +1,29 @@
+// Place all the styles related to the HighLights controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.high_lights {
+
+	
+}
+#high_light_color {
+
+    font-size: 15px;
+    overflow: none;
+   	background: image-url("yellowdot.png") no-repeat right #ddd;
+
+  	-webkit-appearance: none;
+   	-moz-appearance: none;
+
+    text-indent: 0.01px;
+    text-overflow: '';
+
+	#option-red {
+   	    background: image-url("reddot.png") no-repeat right #ddd;
+    }
+	#option-green {
+   	    background: image-url("greendot.png") no-repeat right #ddd;
+	}
+	#option-yellow {
+   	    background: image-url("yellowdot.png") no-repeat right #ddd;
+	}
+}

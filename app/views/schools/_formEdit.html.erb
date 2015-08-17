@@ -1,0 +1,43 @@
+<%= form_for(@school, :html => {:multipart => true}) do |f| %>
+    <% if @school.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@school.errors.count, 'fel') %> hindrar denna användaren från att sparas:</h2>
+          <ul>
+            <% @school.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+      <h3>Editera en skola</h3>
+      <h4 class="subheader">Här kan du editera en redan befintlig skola.</h4>
+      <br />
+      <div class="field">
+        <%= f.label :name, 'Lägg till en ny skola' %>
+        <%= f.text_field :name, :required => true %>
+      </div>
+      <div class="field">
+        <%= f.label :district, 'I vilket län ligger skolan?' %>
+        <%= f.select(:district, [['Blekinge'], ['Dalarnas'], ['Gotlands'], ['Gävleborgs'], ['Hallands'], ['Jämtlands'], ['Jönköpings'], ['Kalmar'], ['Kronobergs'], ['Norrbottens'], ['Skåne'], ['Dalarnas'], ['Stockholms'], ['Södermanslands'], ['Uppsala'], ['Värmlands'], ['Västerbottens'], ['Västernorrlands'], ['Västmanlands'], ['Västra Götalands'], ['Örebro'], ['Östergötlands']]) %>
+      </div>
+      <div class="field">
+        <%= f.label :file, 'Välj en bild att ha i mitten av hjulet' %><br>
+        <%= image_tag @school.file.url, :class => 'centerImage' if @school.file? %>
+
+        <%= f.file_field :file, :class => 'centerImageFileField', accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+        <% if @school.file? %>
+          <p>
+            <%= f.check_box :remove_file %>
+            <%= f.label :remove_file, 'Ta bort bild' %>
+          </p>
+        <% end %>
+      </div>
+      <div id="delete_file" >
+        <% if @school.file.present? %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.submit 'Uppdatera', :class => 'button tiny' %>
+        <%= link_to 'Tillbaka', schools_path, class: 'button tiny back', style: 'color: white' %>
+      </div>
+<% end %>

@@ -1,0 +1,9 @@
+var ringName = '<%= @ringName %>',
+    week = parseInt('<%= @event.week %>'),
+    color = '<%= @color %>',
+    eventTitle = '<%= @event.title %>';
+
+var ring = ringName === 'juror' ? ringName : gon.c_user_type;
+
+wheel.destroyEvent(ring, week, color, eventTitle)
+    .redrawRing(ring);

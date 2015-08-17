@@ -1,0 +1,73 @@
+<!-- CURRENT USER NAME -->
+  <li>
+        <%= content_tag(:div, "#{session[:user_name]}", :style => "font-size:18px; line-height: 45px; color: #ededed; padding-right: 12px; margin-right: -1px;") %>
+  </li>
+  <li class="divider"></li>
+
+<!-- BACK TO WHEEL -->
+  <li>
+    <div>
+      <%= link_to 'Hjulet', root_url, :style => "padding-top: 7px; padding-bottom: 7px; font-size:18px; line-height: 45px;"%>
+    </div>
+  </li>
+  <li class="divider"></li>
+
+<!-- HELP -->
+  <li>
+    <div style="font-size:30px; line-height: 45px;">
+        <a data-reveal-id="myModal" style="color: #ededed; padding-left: 15px; padding-right: 16px;" data-reveal><strong>?</strong></a>
+      <%= render "shared/tutorial" %>
+    </div>
+  </li>
+  <li class="divider"></li>
+
+<!-- PRINT -->
+  <% if (current_uri = request.env['PATH_INFO']== "/") %>
+  <li>
+    <div style="font-size:30px; line-height: 45px;">
+        <a onclick="prepareprint();" style="color: #ededed; padding-left: 15px; padding-right: 16px;">
+          <i class="step fi-print size-72"></i>
+        </a>
+    </div>
+  </li>
+  <li class="divider"></li>        
+  <% else %>
+        
+  <% end %>
+
+<!-- ADMINISTRATION -->
+  <li class="has-dropdown">
+    <div style="font-size:30px; line-height: 45px;">
+        <a style="color: #ededed; padding-left: 15px; padding-right: 16px;">
+          <i class="step fi-widget size-72"></i>
+        </a>
+    </div>
+    <ul class="dropdown">
+      <li><%= link_to 'Administratörer', admin_users_path %></li>
+      <li><div class="insethax"></div><%= link_to 'Skolor', schools_path %></li>
+      <!-- <li><%= link_to 'Nämndemän', juror_users_path %></li> --> <!-- utkommenterat för eventuell framtida utveckling -->
+      <li><%= link_to 'Rektorer', principal_users_path %></li>
+      <li><%= link_to 'Personal', teacher_users_path %></li>
+      <li><%= link_to 'Aktivitetstyper', event_types_path %></li>
+    </ul>
+  </li>
+  <li class="divider"></li>
+
+<!-- PROFILE -->
+  <li class="has-dropdown">
+    <div style="font-size:30px; line-height: 45px;">
+      <a style="color: #ededed; padding-left: 17px; padding-right: 20px;">
+        <i class="step fi-torso size-72"></i>
+      </a>
+    </div>
+    <ul class="dropdown" style="margin-right:8px;">
+      <!-- GET USER ID FROM SESSION -->
+      <li><div class="insethax" style="width: 126px; "></div>
+        <%= link_to 'Min profil', admin_user_path(current_user) %>
+      </li>
+      <!-- DESTROY SESSION -->
+      <li><%= link_to 'Logga ut', signout_path %></li>
+    </ul>
+  </li>
+
+  

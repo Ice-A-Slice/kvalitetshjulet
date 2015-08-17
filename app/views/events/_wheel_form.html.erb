@@ -1,0 +1,124 @@
+
+<% if (current_user.user_type == "admin") or 
+  (current_user.user_type == "juror") or 
+  (
+    (current_user.user_type == "principal" or (current_user.user_type == "teacher" and !current_user.workgroups.empty?)) and current_user.schools.exists?
+  ) %>
+<h3>Vecka <%= @week.to_i+1 %></h3>
+<hr>
+<%= form_for(@event, :html => {:multipart => true}, :remote => true) do |f| %>
+    <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event.errors.count, "fel") %> hindrar aktiviteten från att sparas:</h2>
+
+          <ul>
+            <% @event.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="field">
+      <%= f.label :titel %><br>
+      <%= f.text_field :title, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.label :kommentar %><br>
+      <%= f.text_area :comment, :required => true %>
+    </div>
+    <div class="field">
+      <%= f.label :datum %><br>
+      <% if @event.datetime.present?  %>
+        <% if @event.week.present?  %>
+          <%= f.text_field :datetime, :value => @event.datetime.to_date, :data => {week: @event.week}, :required => true %>
+        <% else %>
+          <%= f.text_field :datetime, :value => @event.datetime.to_date, :data => {week: params[:id]}, :required => true %>
+        <% end %>
+      <% else %>
+         <% if @event.week.present?  %>
+          <%= f.text_field :datetime, :data => {week: @event.week}, :required => true %>
+        <% else %>
+          <%= f.text_field :datetime, :data => {week: params[:id]}, :required => true %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div id="dot_color" class="field">
+      <%= f.label :type_id, 'Välj typ av aktivitet' %>
+      <%= f.hidden_field :type_id %>
+    </div>
+    <%= f.hidden_field :type_id, :id => 'pre_color', :name => 'pre_color', :value => @pre_color %>
+    <div id="output"></div>
+
+    <div class="field">
+
+      <% if current_user.user_type == 'admin' %>
+          <% if @current_ring == 'juror' %>
+              <% # När både user_id och school_id är satt så är det ett juror-event %>
+              <%= f.hidden_field :school_id, :value => 0 %>
+              <%= f.hidden_field :user_id, :value => current_user.id %>
+          <% else %>
+              <%= f.hidden_field :user_id, :value => current_user.id %>
+              <% # en hidden field med ett "nil" värde som gör det synligt för alla skolor %>
+              <%= f.hidden_field :school_id, :value => "" %>
+          <% end %>
+
+      <% elsif @current_ring == 'principal' %>
+          <!-- hämta alla skolor som current user är registrerad på -->
+          <%= f.label :skola %><br>
+          <%= f.collection_select(:school_id, current_user.schools, :id, :name) %>
+          <%= f.hidden_field :user_id, :value => "" %>
+
+      <% elsif @current_ring == 'teacher' %>
+
+          <%= f.label :workgroup, 'Arbetsgrupp' %><br>
+          <%= f.collection_select(:workgroup, current_user.workgroups, :id, :name) %>
+
+          <%= f.hidden_field :school_id, :value => @schoolId %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+      <% end %>
+    </div>
+    <div class="field">
+      <% if @event.week.present? %>
+            <%= f.hidden_field :week %>
+      <% else %>
+            <%= f.hidden_field :week, :value => params[:id] %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :file, 'Fil' %><br>
+      <%= f.file_field :file %>
+    </div>
+    <%= f.hidden_field :ring_name, :value => @current_ring %>
+
+    <div class="actions">
+      <% if @event.datetime.present?  %>
+        <% submit_text = 'Uppdatera aktivitet' %>
+      <% else %>
+        <% submit_text = 'Skapa aktivitet' %>
+      <% end %>
+      <%= f.submit submit_text ,:class => 'button tiny', :remote => true, style: 'float: left; margin-right: 10px;' %>
+    </div>
+    <button class="actions button tiny" style="background-color: #ba0000; margin-left:10px;" type="button" onclick="toggle();">Avbryt</button>
+<% end %>
+  <div id = "delete_file" >
+      <% if @event.file.present? %>
+            Bifogad fil: <%= link_to 'ladda ner', @event.file.url %>
+            | <%= button_tag 'Ta bort', :data => { deletefile: "/sessions/delete_file/#{@event.id}" }, :class => 'unbind_click, button tiny back' %>
+      <% end %>
+
+    </div>
+
+<script>
+    $(document).ready(function(){
+        $('#event_comment').autosize();
+    });
+
+</script>
+
+<% else %>
+<h4 class="subheader">Du kan inte skapa aktiviteter när du inte tillhör någon skola eller arbetsgrupp. Be administratören att lägga till dig till en skola eller arbetsgrupp.</h4>
+<% end %>

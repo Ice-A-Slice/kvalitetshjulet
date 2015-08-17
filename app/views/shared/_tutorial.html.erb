@@ -1,0 +1,51 @@
+<div id="myModal" class="reveal-modal" style="padding: 40px;" data-reveal>
+  <h4 class="large-12 columns">Hjälp | <%= session[:user_type] %></h4>
+  <div class="large-7 columns">
+    <p class="tutorial_highlight_green" style="margin: 0px; padding-bottom: 12px;"><b>Utbildningsnämnden</b><br/>
+    Den yttersta ringen är utbildningsnämndens årshjul.</p>
+    <p class="tutorial_highlight_blue" style="margin: 0px; padding-bottom: 12px;"><b>Utbildningsförvaltningen</b><br/>
+    Den näst yttersta ringen beskriver hur det förvaltningsövergripande kvalitetsarbetet är organiserat. I detta årshjul finns uppföljningsdatum för de övergripande kvalitetsområdena samt information om aktuella kvalitetsmått.</p>
+    <p class="tutorial_highlight_teal" style="margin: 0px; padding-bottom: 12px;"><b>Skola</b><br/>
+    Den näst innersta ringen beskriver hur din skola valt att organisera det systematiska kvalitetsarbetet. Rektor på skolan beslutar om hur och när de övergripande kvalitetsområdena planeras, genomförs, följs upp och analyseras.</p>
+    <p class="tutorial_highlight_purple" style="margin: 0px; padding-bottom: 12px;"><b>Personal</b><br/>
+    Den innersta ringen är ett planeringsverktyg för dig som anställd. Genom att markera skiftningar i arbetsbelastningen synliggörs ditt årshjul. Detta kan t.ex. fungera som ett underlag till RUS-samtalet. Här kan du också beskriva med hjälp av kommentarer hur du arbetar med din skolas kvalitetsarbete.</p>
+  </div>
+  <div class="large-5 columns" style="height: 320px;">
+    <%= image_tag("none_highlighted.jpg", :alt => "none_highlighteded", :class => "none_highlighteded", :style => 'height: 350px; width: 350px; position: absolute; float: left; margin-left: 60px; z-index: 1;') %>
+    <%= image_tag("first_highlighted.jpg", :alt => "first_highlighted", :class => "first_highlighted", :style => 'height: 350px; width: 350px; position: absolute; float: left; margin-left: 60px; z-index: 2; opacity: 0;') %>
+    <%= image_tag("second_highlighted.jpg", :alt => "second_highlighted", :class => "second_highlighted", :style => 'height: 350px; width: 350px; position: absolute; float: left; margin-left: 60px; z-index: 2; opacity: 0;') %>
+    <%= image_tag("third_highlighted.jpg", :alt => "third_highlighted", :class => "third_highlighted", :style => 'height: 350px; width: 350px; position: absolute; float: left; margin-left: 60px; z-index: 2; opacity: 0;') %>
+    <%= image_tag("fourth_highlighted.jpg", :alt => "fourth_highlighted", :class => "fourth_highlighted", :style => 'height: 350px; width: 350px; position: absolute; float: left; margin-left: 60px; z-index: 2; opacity: 0;') %>
+  </div>
+
+  <div class="large-12 columns">
+    <h4>Lägga till event</h4>
+  </div>
+
+  <div class="large-5 columns">
+    <%= image_tag("belastning_form.jpg", :alt => "belastning_form.jpg") %>
+  </div>
+  <div class="large-7 columns">
+  <p><br>För att lägga till en händelse klickar du på den vecka, på ditt hjul, där du vill lägga det.
+  Det kommer då fram ett formulär som du fyller i med din information (se bild). Titel, kommentar, datum, färg, och eventuella filer.<br> Tryck sedan på "Skapa" för att spara informationen. <br>
+  Du kommer då se en prick med din valda färg på veckan som representerar händelsen. 
+  <br>Du kan endast skapa händelser på din egen cirkel.
+  En vecka med fler händelser kommer ha en "delad" cirkel med olika färger.</p>
+  
+  </div> 
+
+  <div class="large-12 columns">
+    <h4>Lägga till belastning</h4>
+  </div>
+
+  <div class="large-7 columns">
+  <p><br>För att lägga till belastning klickar du på veckan i ditt hjul där belastningen ska ligga. Du fyller i formuläret som dyker upp med information; aktivitet, samt belastning. Antingen hög, normal eller låg. Klicka på "Lägg till" så sparas informationen.</p>
+  </div>
+
+  <div class="large-5 columns">
+    <%= image_tag("belastning_form.jpg", :alt => "belastning_form.jpg") %>
+  </div>
+
+  
+  <a class="close-reveal-modal">&#215;</a>
+</div>

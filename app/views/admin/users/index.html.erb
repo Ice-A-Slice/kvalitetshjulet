@@ -1,0 +1,27 @@
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+  <tr>
+    <th>Namn</th>
+    <th>Email</th>
+    <th class="list"></th>
+    <th class="list"></th>
+    <th class="list"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |p| %>
+      <tr>
+        <td><%= p.name %></td>
+        <td><%= p.email %></td>
+        <td><%= link_to 'Visa', "users/#{p.id}" %></td>
+        <td><%= link_to 'Redigera', edit_admin_user_path(p) %></td>
+        <td><%= link_to 'Ta bort', "users/#{p.id}", :method => :delete, data: { confirm: 'Är du säker på att du vill ta bort ' + p.name + '?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Skapa en ny Administratör', new_admin_user_path, class: 'button tiny' %><br>

@@ -1,0 +1,20 @@
+en: 
+  activerecord: 
+    errors: 
+      models: 
+        school: 
+          attributes: 
+            name: 
+              blank: "Name can't be blank"
+        user: 
+          attributes: 
+            email: 
+              blank: "Email can't be blank"
+              invalid: "is invalid"
+              taken: "Email is taken"
+              too_long: "Email to long"
+            email_confirmation: 
+              confirmation: "doesn't match"
+            name: 
+              blank: "Name can't be blank"
+

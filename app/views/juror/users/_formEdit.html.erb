@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+    <%= form_for [:juror, @user] do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <% if msg.include? 'confirmation ' %>
+                  <li><%= msg.gsub!('confirmation ','') %></li>
+              <% else %>
+                  <li><%= msg %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+<% end %>
+      <h3>Ändra befintlig nämndeman</h3>
+      <h4 class="subheader">Här kan du ändra uppgifterna på en aktuell nämndeman. Kom ihåg att vara noga med informationen du fyller i. Du kan alltid
+      kontankta en administratör om du får några problem. Samtliga fält måste fyllas i.</h4>
+      <br />
+      <div class="field">
+        <%= f.label :name, "Namn" %>
+        <%= f.text_field :name, :required => true %>
+      </div>
+      <div class="field">
+        <label>Nuvarande mailadress</label>
+        <%= f.text_field :email, disabled: true, :required => true %> <!-- Rails 3 injection. !-->
+      </div>
+      <div class="field">
+        <%= f.label :email, "Ny email" %>
+        <%= f.text_field :email, :required => true %> <!-- Rails 3 injection. !-->
+      </div>
+      <div class="field">
+        <%= f.label :email_confirmation, "Bekräfta ny email" %>
+        <%= f.text_field :email_confirmation, :required => true %>
+      </div>
+      <div class="field">
+        <%= f.hidden_field :user_type, :value=> "juror" %>
+      </div>
+      <div class="actions" style="float: left; margin-right: 10px;" >
+
+         <%= f.submit "Uppdatera", :class => "button tiny" %>
+         <%= link_to 'Tillbaka', juror_users_path, class: 'button tiny back', style: 'color: white' %>
+
+      </div>
+    </div>
+<% end %>

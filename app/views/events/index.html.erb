@@ -1,0 +1,42 @@
+<h1>Lista över event</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titel</th>
+      <th>kommentar</th>
+      <th>Datum</th>
+      <th>Vecka</th>
+      <th>Roll</th>
+      <th>Skola</th>
+      <th>Bifogad Fil</th>
+      <th class="list">Visa</th>
+      <th class="list">Redigera</th>
+      <th class="list">Ta bort</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= event.comment %></td>
+        <td><%= event.datetime %></td>
+        <td><%= event.week %></td>
+        <td><%= event.user_id %></td>
+        <td><%= event.school_id %></td>
+        <% if event.file.present? %>
+        <td><%= link_to 'Ladda ner', event.file.url %></td>
+        <% else %>
+        <td><span style="color:lightgrey;">Ingen fil</span></td> 
+        <% end %>
+        <td><%= link_to 'Visa', event %></td>
+        <td><%= link_to 'Redigera', edit_event_path(event) %></td>
+        <td><%= link_to 'Ta bort', event, method: :delete, data: { confirm: "Är du säker på att du vill ta bort #{event.title} ?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Lägg till', new_event_path, class: 'button tiny', style: 'color: white; margin-top: 20px;' %>

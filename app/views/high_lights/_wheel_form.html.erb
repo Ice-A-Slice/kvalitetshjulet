@@ -1,0 +1,52 @@
+<h3>Vecka <%= @week.to_i+1 %></h3>
+<hr>
+<%= form_for(@high_light,  :remote => true) do |f| %>
+  <% if @high_light.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@high_light.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+
+      <ul>
+      <% @high_light.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% if @high_light.week.present? %>
+    <%= f.hidden_field :week %>
+    <% else %>
+    <%= f.hidden_field :week, :value => params[:id].to_i+1 %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :year %>
+  </div>
+    <div class="field">
+    <%= f.label :aktivitet %><br>
+    <%= f.text_area :comment, :required => true %>
+  </div>
+  <div class="field">
+    <%= f.label :arbetsbelastning %><br>
+    <%= f.select(:color, options_for_select([['Hög', 1, :id => 'option-red'], ['Normal', 2, :id => 'option-yellow'], ['Låg', 3, :id => 'option-green']], 2), {}, :onchange => "$(this).css('background', $('select option:selected').css('background'));") %>
+  </div>
+  <div class="field">
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+    <div class="actions">
+      <% if params[:action] == 'new_high_lights' %>
+          <%= f.submit "Lägg till", :class => "button tiny", style: 'margin-top: 20px;' %>
+      <% else %>
+          <%= f.submit "Uppdatera", :class => "button tiny", style: 'margin-top: 20px;' %>
+      <% end %>
+    </div>
+<% end %>
+
+
+<script>
+    $(document).ready(function(){
+        $('#high_light_comment').autosize();
+    });
+
+</script>

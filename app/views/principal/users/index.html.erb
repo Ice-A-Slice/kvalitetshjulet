@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<% if @users %>
+<br/>
+<h4>Lista över rektorer</h4>
+<div class="row">
+  <div class="large-12 columns">
+        <table>
+          <thead>
+          <tr>
+            <th>Namn</th>
+            <th>Email</th>
+            <th class="list">Visa</th>
+            <th class="list">Redigera</th>
+            <th class="list">Ta bort</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @users.each do |p| %>
+              <tr class="user" id="asset_<%= p.id %>">
+                <td><%= p.name %></td>
+                <td><%= p.email %></td>
+                <td><%= link_to 'Visa', "users/#{p.id}" %></td>
+                <td><%= link_to 'Redigera', edit_principal_user_path(p) %></td>
+                <td><%= link_to 'Ta bort', principal_user_path(p) , method: :delete, 
+              data: {confirm: "Är du säker på att du vill ta bort denna användaren?"}, remote: true %> <br/>
+            </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+  </div>
+</div>
+<br>
+<%= link_to 'Skapa en ny rektor', new_principal_user_path, class: 'button tiny', style: 'color: white; margin.top: 20px;' %><br>
+<% else %>
+    <br />
+    <h4>Just nu finns inga rektorer inlagda.</h4>
+
+<% end %>

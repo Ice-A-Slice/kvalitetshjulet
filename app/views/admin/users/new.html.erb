@@ -1,0 +1,38 @@
+<%= form_for [:admin, @user] do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "fel") %> hindrar denna användaren från att sparas:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <% if msg.include? 'confirmation ' %>
+                  <li><%= msg.gsub!('confirmation ','') %></li>
+              <% else %>
+                  <li><%= msg %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="large-6 medium-8 small-12 columns">
+        <h3>Lägg till en ny Administratör</h3>
+        <div class="field">
+          <%= f.label :namn %>
+          <%= f.text_field :name, :required => true %>
+        </div>
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.text_field :email, :required => true %>
+        </div>
+        <div class="field">
+            <%= f.label :email_confirmation, "Bekräfta mailadress" %>
+            <%= f.text_field :email_confirmation, :required => true %>
+        </div>
+        <div class="field">
+          <%= f.hidden_field :user_type, :value=> "admin" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Lägg till", :class => "button tiny left" %>
+          <%= link_to 'Tillbaka', principal_users_path, class: 'button tiny back right'%>
+        </div>
+    </div>
+<% end %>

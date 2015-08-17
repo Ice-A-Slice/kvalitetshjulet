@@ -1,0 +1,84 @@
+<% if error %>
+    <div id="error_explanation">
+      <h2><%= error.count %> fel hindrar att alla användare sparas korrekt:</h2>
+      <ul>
+        <% error.each do |e| %>
+            <li><%= e %></li>
+        <% end %>
+      </ul>
+    </div>
+<% else %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<br/>
+<h4>Lista över all personal</h4>
+<table>
+  <thead>
+  <tr>
+    <th>Namn</th>
+    <th>Email</th>
+    <th class="list">Visa</th>
+    <th class="list">Redigera</th>
+    <th class="list">Ta bort</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if current_user.user_type=="principal" %>  <!-- if statement checks if current_user is a principal -->
+    <% current_user.schools.map do |principalSchools| %>  <!-- Iterate thru the schools that the current principal works at-->
+      <% @users.each do |p| %>  <!-- Start looping thru all the teachers in the database -->
+        <% p.schools.map do |teacherSchools| %>  <!-- iterate thru the schools that this teacher works at -->
+          <% if teacherSchools == principalSchools %>  <!-- if a school that the teacher and the principal works at -->
+            <tr class="user" id="asset_<%= p.id %>">
+              <td><%= p.name %></td>
+              <td><%= p.email %></td>
+              <td><%= link_to 'Visa', "users/#{p.id}" %></td>
+              <td><%= link_to 'Redigera', edit_teacher_user_path(p) %></td>
+              <td>
+                <%= link_to 'Ta bort', teacher_user_path(p) , method: :delete,
+                              data: {confirm: "Vill du ta bort denna användaren?"}, remote: true %> <br/>
+              </td>
+            </tr>
+          <% end %> <!-- if teacherSchools == principalSchools end -->
+        <% end %><!-- teacherSchools iteration end -->
+      <% end %><!-- @users.each end-->
+    <% end %><!-- principalSchools iteration end -->
+
+    <% else %> <!-- if the current_user is admin -->
+      <% @users.each do |p| %>
+        <tr class="user" id="asset_<%= p.id %>">
+          <td><%= p.name %></td>
+          <td><%= p.email %></td>
+          <td><%= link_to 'Visa', "users/#{p.id}" %></td>
+          <td><%= link_to 'Redigera', edit_teacher_user_path(p) %></td>
+          <td>
+            <%= link_to 'Ta bort', teacher_user_path(p) , method: :delete,
+                          data: {confirm: "Vill du ta bort denna användaren?"}, remote: true %> <br/>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Skapa ny personal', new_teacher_user_path, class: 'button tiny', style: 'color: white; margin-top: 20px;' %><br>
+
+<h4>Importera personal med ett dokument</h4>
+<div class="import">
+<p>För kunna importera användare via ett dokument är det viktigt att vissa riktlinjer följs. Nedan kan du se ett exempel på
+hur ett dokument ska se ut. Det är viktigt att rätt information skrivs med och att den står i rätt ordning; Efternamn, Förnamn, Skola, Roll, E-mail. De filformat som som kan användas är excell (.xls, .xlsx) och csv (.csv).</p>
+  <%= image_tag("import.png", :alt => "import.png") %>
+</div><br/>
+
+
+<%= form_tag import_teacher_users_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Importera", :class => 'button tiny' %>
+<% end %>
+<% if @noSchoolErrors %>
+    <% @noSchoolErrors.each do |e| %>
+        <%= e %> <br />
+    <% end %>
+<% end %>

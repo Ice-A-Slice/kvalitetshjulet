@@ -1,0 +1,31 @@
+<br/>
+<h4>Lista över händelser</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Week</th>
+      <th>Year</th>
+      <th>Color</th>
+      <th>Comment</th>
+      <th>User</th>
+      <th class="list">Visa</th>
+      <th class="list">Redigera</th>
+      <th class="list">Ta bort</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @high_lights.each do |high_light| %>
+      <tr>
+        <td><%= high_light.week %></td>
+        <td><%= high_light.year %></td>
+        <td><%= high_light.color %></td>
+        <td><%= high_light.comment %></td>
+        <td><%= high_light.user %></td>
+        <td><%= link_to 'Visa', high_light %></td>
+        <td><%= link_to 'Redigera', edit_high_light_path(high_light) %></td>
+        <td><%= link_to 'Ta bort', high_light, method: :delete, data: { confirm: 'Är du säker på att du vill ta bort detta eventet?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

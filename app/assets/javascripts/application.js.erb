@@ -1,0 +1,50 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require jquery.remotipart
+//= require jquery-ui-1.10.4.custom.min.js
+//= require syronex-colorpicker.js
+//= require dataTables/jquery.dataTables
+//= require dataTables.foundation.js
+//= require jquery.autosize.min.js
+//= require foundation
+//= require_tree .
+
+
+$(function(){ $(document).foundation(); });
+
+$(document).ready(function() {
+
+	$("div").click(function() {
+	   $('#welcome').animate({"opacity": "0"}, 680);
+	});
+
+	$('table').not('[data-escape="dataTable"]').dataTable({
+	  "sPaginationType": "foundation",
+	  "oLanguage": {
+	    "sEmptyTable": "Det finns inga resultat att visa",
+	    "sSearch": "Sök: ",
+	    "sInfoEmpty": "Visar 0 till 0 av 0 träffar",
+	    "sInfo": "Visar _START_ till _END_ av _TOTAL_ träffar",
+	    "sInfoFiltered": "",
+	    "sLengthMenu": " _MENU_ Träffar per sida",
+      "sDefaultContent": ""
+	  },
+    "aoColumns": null // There is a warning (comparing the columns in the DB and the columns in the table) if 'aoColomns' is not set
+  });
+});
+
+
+
+

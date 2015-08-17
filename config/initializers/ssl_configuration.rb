@@ -1,0 +1,1 @@
+ENV["SSL_CERT_FILE"] = "config/cacert.pem"
