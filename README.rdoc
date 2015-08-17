@@ -1,28 +1,17 @@
-== README
+Kvalitetshjulet is a web based administration application for different kind of employees in schools in the comunity Olofström in Sweden. It is their platform to visualize the schedule and events in their personal schools and on state level. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Get the git repo
 
-Things you may want to cover:
+Run "bundle install" to install all gems an "rake db:migrate" to create/update the database tables. 
 
-* Ruby version
+To be able to use the application you will have to write down an existing gmail in the seeds.db file, you will also write with role you will have ("admin", "teacher", "principal" or "juror", I would recommend to be a admin so you have permission for everything in the application), run "rake db:seed" in the console. 
 
-* System dependencies
+Run "rails s" to start up a local server.
+Open a web browser (make sure to be online with the gmail account you wrote down in the seeds.db file) and go to localhost:3000
+to log in to the gmail  Skriv in den gmail i seeds.db filen och kör "rake db:seed"
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+See youtube demonstration
+www.youtube.com/watch?v=3ttF7cCxcKQ
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
