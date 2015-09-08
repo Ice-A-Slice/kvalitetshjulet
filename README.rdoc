@@ -1,4 +1,5 @@
 Built with Ruby On Rails 4
+
 Written by me and my 10 class mates.
 
 Kvalitetshjulet is a web based administration application for different kind of employees in schools in the comunity Olofström in Sweden. It is their platform to visualize the schedule and events in their personal schools and on state level. 
